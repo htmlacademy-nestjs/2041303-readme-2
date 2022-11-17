@@ -1,5 +1,6 @@
 export enum BlogSort {
   POPULARITY = 'popularity',
-  DATE =  date, number of likes, number of
-  comments
+  DATE =  'date',
+  LIKES = 'likes',
+  COMMENTS = 'comments',
 }

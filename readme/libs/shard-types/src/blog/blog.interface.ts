@@ -2,6 +2,8 @@ export interface BlogInterface {
 
   create (dto:string):Promise<void>;
 
+  findByTitle(title:string):Promise<string[] | null>;
+
   find():Promise<string[]>;
 
   findByCategory(category:string):Promise<string[]>;
@@ -16,14 +18,4 @@ export interface BlogInterface {
 
   createComment(id:string, dto:string):Promise<void>;
 
-
-
-
-  1.12. Получение списка публикаций с применением сортировки:
-  по популярности, дате создания, по количеству лайков, по количеству
-  комментариев.
-
-  1.15. Категоризация публикаций по тегам.
-
-  1.17. Поиск публикаций по названию.
 }

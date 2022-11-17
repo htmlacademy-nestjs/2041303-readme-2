@@ -1,4 +1,4 @@
-export enum Blog {
+export enum BlogStatus {
    PUBLISHED = "Published",
    DRAFT = "Draft",
 }
