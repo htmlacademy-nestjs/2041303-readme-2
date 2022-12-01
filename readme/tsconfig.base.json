@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "strict": true,
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -14,7 +15,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@readme/core": ["libs/core/src/index.ts"],
+      "@readme/shard-types": ["libs/shard-types/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
