@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common'
 import { AuthService } from './auth.service'
-import { CreateUserDto } from './dto/creat-user.dto'
+import { CreateUserDto } from './dto/create-user.dto'
 import { getDataToDto } from '@readme/core'
 import { UserRdo } from './rdo/user.rdo'
 import { LoginUserDto } from './dto/login-user.dto'
