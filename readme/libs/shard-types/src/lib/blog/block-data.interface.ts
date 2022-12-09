@@ -9,6 +9,7 @@ export interface BlockDataInterface {
     teg?: string
     preview?: string
     description?: string
-    author?: string
-    image?: string
+    authorId?: string
+    imageId?: string
+    commentsId?: string
 }

@@ -6,7 +6,6 @@ import { BlogUserEntity } from './blog-user.entity'
 import { BlogUserModel } from './blog-user.model'
 
 Injectable()
-
 export class BlogUserRepository {
     constructor(
         @InjectModel(BlogUserModel.name)

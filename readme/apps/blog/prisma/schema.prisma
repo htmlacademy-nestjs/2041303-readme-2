@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Artical {
+  id                  Int                   @id @default(autoincrement())
+  articalStatus       ArticalStatus[]
+  category            ArticalCategory[]
+  createdAt           DateTime              @default(now())
+  publishAt           DateTime              @default(now())
+  title               String
+  link                String
+  teg                 String
+  preview             String
+  description         String
+  authorId            String
+  imageId             String
+  PropertiesOnartical PropertiesOnartical[]
+}
+
+model ArticalStatus {
+  id                  Int                   @id @default(autoincrement())
+  title               String
+  articals            Artical[]
+  PropertiesOnartical PropertiesOnartical[]
+}
+
+model ArticalCategory {
+  id                  Int                   @id @default(autoincrement())
+  title               String
+  bligs               Artical[]
+  PropertiesOnartical PropertiesOnartical[]
+}
+
+model PropertiesOnartical {
+  artical         Artical         @relation(fields: [articalId], references: [id])
+  articalId       Int
+  articalCategory ArticalCategory @relation(fields: [categoryId], references: [id])
+  categoryId      Int
+  articalStatus   ArticalStatus   @relation(fields: [statusId], references: [id])
+  statusId        Int
+  assignedAt      DateTime        @default(now())
+  assignedBy      String
+
+  @@id([articalId, categoryId, statusId])
+}
