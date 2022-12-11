@@ -19,7 +19,13 @@ export class AuthController {
     })
     @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
     async create(@Body() dto: CreateUserDto) {
-        const newUser = await this.authService.register(dto)
+        const { email, name, lastName, password } = dto
+        const newUser = await this.authService.register(
+            email,
+            name,
+            lastName,
+            password
+        )
         return getDataToDto(UserRdo, newUser)
     }
 
@@ -34,7 +40,7 @@ export class AuthController {
         description: 'Password or login wrong',
     })
     async login(@Body() dto: LoginUserDto) {
-        const verifyUser = this.authService.verifyUser(dto)
+        const verifyUser = this.authService.verifyUser(dto.email, dto.password)
         return getDataToDto(LoggedUserRdo, verifyUser)
     }
 

@@ -6,16 +6,15 @@ import { BlogUserEntity } from './blog-user.entity'
 import { BlogUserModel } from './blog-user.model'
 
 Injectable()
-
 export class BlogUserRepository {
     constructor(
         @InjectModel(BlogUserModel.name)
         private readonly blogUserModule: Model<BlogUserModel>
     ) {}
 
-    public async create(createUserDto: BlogUserEntity): Promise<BlogUserModel> {
-        const createUser = new this.blogUserModule(createUserDto)
-        return createUser.save()
+    public async create(createUser: BlogUserEntity): Promise<BlogUserModel> {
+        const user = new this.blogUserModule(createUser)
+        return user.save()
     }
 
     public async destroy(id: string): Promise<void> {
