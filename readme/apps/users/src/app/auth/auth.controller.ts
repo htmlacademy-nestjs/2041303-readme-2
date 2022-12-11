@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common'
 import { AuthService } from './auth.service'
-import { CreateUserDto } from './dto/creat-user.dto'
+import { CreateUserDto } from './dto/create-user.dto'
 import { getDataToDto } from '@readme/core'
 import { UserRdo } from './rdo/user.rdo'
 import { LoginUserDto } from './dto/login-user.dto'
@@ -19,7 +19,13 @@ export class AuthController {
     })
     @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
     async create(@Body() dto: CreateUserDto) {
-        const newUser = await this.authService.register(dto)
+        const { email, name, lastName, password } = dto
+        const newUser = await this.authService.register(
+            email,
+            name,
+            lastName,
+            password
+        )
         return getDataToDto(UserRdo, newUser)
     }
 
@@ -34,7 +40,7 @@ export class AuthController {
         description: 'Password or login wrong',
     })
     async login(@Body() dto: LoginUserDto) {
-        const verifyUser = this.authService.verifyUser(dto)
+        const verifyUser = this.authService.verifyUser(dto.email, dto.password)
         return getDataToDto(LoggedUserRdo, verifyUser)
     }
 
