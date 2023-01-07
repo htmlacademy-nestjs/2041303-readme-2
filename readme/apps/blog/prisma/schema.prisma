@@ -11,45 +11,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Artical {
+model Article {
   id                  Int                   @id @default(autoincrement())
-  articalStatus       ArticalStatus[]
-  category            ArticalCategory[]
-  createdAt           DateTime              @default(now())
-  publishAt           DateTime              @default(now())
+  articleStatus       Boolean               @map("articalStatus")
+  category            Category[]
+  createAt            DateTime              @default(now())
+  updateAt            DateTime              @default(now())
   title               String
   link                String
-  teg                 String
   preview             String
   description         String
-  authorId            String
-  imageId             String
-  PropertiesOnartical PropertiesOnartical[]
+  authorName          String
+  teg                 TegCategory[]
+  propertiesOnArtical PropertiesOnArtical[]
 }
 
-model ArticalStatus {
+model TegCategory {
   id                  Int                   @id @default(autoincrement())
   title               String
-  articals            Artical[]
-  PropertiesOnartical PropertiesOnartical[]
+  article             Article[]
+  propertiesOnArtical PropertiesOnArtical[]
 }
 
-model ArticalCategory {
+model Category {
   id                  Int                   @id @default(autoincrement())
   title               String
-  bligs               Artical[]
-  PropertiesOnartical PropertiesOnartical[]
+  article             Article[]
+  propertiesOnArtical PropertiesOnArtical[]
 }
 
-model PropertiesOnartical {
-  artical         Artical         @relation(fields: [articalId], references: [id])
-  articalId       Int
-  articalCategory ArticalCategory @relation(fields: [categoryId], references: [id])
-  categoryId      Int
-  articalStatus   ArticalStatus   @relation(fields: [statusId], references: [id])
-  statusId        Int
-  assignedAt      DateTime        @default(now())
-  assignedBy      String
+model PropertiesOnArtical {
+  article     Article     @relation(fields: [articalId], references: [id])
+  articalId   Int
+  tegCategory TegCategory @relation(fields: [tegId], references: [id])
+  tegId       Int
+  category    Category    @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  assignedAt  DateTime    @default(now())
+  assignedBy  String
 
-  @@id([articalId, categoryId, statusId])
+  @@id([articalId, categoryId, tegId])
+  @@map("PropertiesOnartical")
 }
