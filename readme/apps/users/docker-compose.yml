@@ -4,6 +4,12 @@ services:
         image: mongo
         restart: always
         container_name: mongodb
+        healthcheck:
+          test: CMD curl -sS 0.0.0.0:27017 || exit 1
+          interval: 5s
+          timeout: 5s
+          retries:  10
+          start_period: 15s
         environment:
             MONGO_INITDB_ROOT_USERNAME: admin
             MONGO_INITDB_ROOT_PASSWORD: test
@@ -17,6 +23,12 @@ services:
         image: mongo-express
         restart: always
         container_name: mongo-express
+        healthcheck:
+          test: CMD curl -sS 0.0.0.0:8081 || exit 1
+          interval: 5s
+          timeout: 5s
+          retries:  10
+          start_period: 15s
         ports:
             - 8081:8081
         environment:

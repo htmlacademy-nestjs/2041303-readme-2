@@ -1,0 +1,11 @@
+
+
+# Get category by id
+GET http://localhost:3333/api/categories/video HTTP/1.1
+
+###
+
+# Get all categories
+GET http://localhost:3333/api/categories/ HTTP/1.1
+
+###
